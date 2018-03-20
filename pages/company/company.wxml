@@ -1,0 +1,70 @@
+<view class='content' bindtap='closeModal'>
+  <view id='static-content' class='static-content'>
+    <view class='input-map-wrapper'>
+      <view class='input-wrapper'>
+        <input placeholder="请输入商家名称" value='{{nodeNameInterim}}' class='input-box' 
+        bindinput='changeKey' bindconfirm="selectKey" confirm-type='search' />
+        <image bindtap='selectKey' src='../../images/search-icon_03.png' class='search-icon'  mode="widthFix" ></image> 
+      </view>
+      <!-- <view class='map-iocn' bindtap='turnMap'>地图</view> -->
+      <image src='../../images/map-icon.png' class='map-iocn' mode="widthFix" bindtap='turnMap'></image>
+    </view>
+    <view class='limit-wrapper' >
+      <view class='limit-wrapper-box'>
+        <view class='company-area flex-item' catchtap='toggleArea'>
+          <view class='item-name'>
+            {{areaName}}
+            <image src='../../images/arrow-icon.png' class='arrow-icon {{areaFlag ? "active": ""}}'  mode="widthFix"></image>
+          </view>
+        </view>
+        <view class='company-type flex-item' catchtap='toggleType'>
+          <view class='item-name'>
+            {{companyTypeName}}
+            <image src='../../images/arrow-icon.png' class='arrow-icon {{companyTypeFlag ? "active": ""}}'  mode="widthFix"></image> 
+          </view> 
+        </view>
+      </view>
+      <view class='limit-content-wrapper'>
+        <scroll-view scroll-y style="height: 580rpx; display: {{areaFlag? 'block' :'none'}}" class='area-content' id='area_wrapper'>
+          <view wx:for="{{areaList}}" wx:key="{{index}}" class='item' data-areaId="{{item.areaId}}" data-areaName="{{item.areaName}}" bindtap='selectArea'>{{item.areaName}}</view>
+        </scroll-view>
+        <view style="display: {{companyTypeFlag? 'block' :'none'}}" class='type-content' id='company_wrapper'>
+          <view data-typeId="" class='item' bindtap='selectCompanyTypeId'>全部</view>
+          <view data-typeId="{{'0001'}}" class='item' data-typeName="{{'屠宰企业'}}" bindtap='selectCompanyTypeId'>屠宰企业</view>
+          <view data-typeId="{{'0002'}}" class='item' data-typeName="{{'批发市场'}}" bindtap='selectCompanyTypeId'>批发市场</view>
+          <view data-typeId="{{'0003'}}" class='item' data-typeName="{{'零售市场'}}" bindtap='selectCompanyTypeId'>零售市场</view>
+          <view data-typeId="{{'0004'}}" class='item' data-typeName="{{'连锁超市'}}" bindtap='selectCompanyTypeId'>连锁超市</view>
+          <view data-typeId="{{'0007'}}" class='item' data-typeName="{{'团体消费'}}" bindtap='selectCompanyTypeId'>团体消费</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y='{{areaFlag ? false : companyTypeFlag ? false : true}}' style='height: {{scrollH}}px' bindscrolltolower='loadMore' scroll-top='{{scrollTop}}'  class='compaby-list-wrapper'>
+    <view wx:for="{{dataList}}" class='company-item' wx:key="{{index}}">
+      <view class='top'>
+        <view class='name' wx:if="{{!nodeName}}">{{item.node_name}}</view>
+        <view class='name' wx:else>{{item.firstPart}}<view class='keyword'>{{item.keyword}}</view>{{item.lastPart}}</view>
+      </view>
+      <view class='subtype-content'>
+        <view class='left'>
+          <view class='subtype'>{{item.node_type}}</view>
+          <view class='traceability-type'>可追溯品类：{{item.traceability_type}}</view>
+        </view>
+        <view class='distance'>{{item.distance}} km</view>
+      </view>
+      <view class='bottom' data-lat="{{item.Y_COORDINATE}}" data-lon="{{item.X_COORDINATE}}" data-name="{{item.addr}}" bindtap='openMap'>
+        <image class='location-icon' mode="widthFix" src='../../images/location-icom.png'></image>
+        <view class='address'>{{item.addr}}</view>
+      </view> 
+    </view>
+    <view class='loading' wx:if="{{isLoading}}">加载中. . .</view>
+    <view class='finish' wx:if="{{isFinish}}">没有更多</view> 
+  </scroll-view>
+  <view class='modal-wrapper' style='display: {{areaFlag? "block" : companyTypeFlag? "block": "none" }}' ></view>
+  <view class='loading-wrapper' hidden='{{!initeLoading}}'><image src='../../images/loading.gif' class='loading'></image></view>
+  <view class='fail-wrapper' wx:if="{{isFail}}">
+    <view class='fail-content'>
+      网络可能出现了问题，请稍后再试
+    </view>
+  </view>
+</view>

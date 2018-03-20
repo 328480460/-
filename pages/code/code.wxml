@@ -1,0 +1,162 @@
+<view class="result-wapper" hidden="{{!hiddenLoading}}">
+  <view class="jumbotron-result">
+    <image class="logo" src="../../images/logo.png"></image>
+    <text class="tip">可追溯，更放心</text>
+  </view>
+  <view class="search-result">
+    <view class="base">
+      <block wx:if="{{result.length == 1 && !!result[0].goods_name}}">
+        <view class="title flex">
+          <label class="strong">商品名称：</label>
+          <text class="flex-item overflow">{{result[0].goods_name}}</text>
+        </view>
+      </block>
+      <view class="title flex">
+        <label class="strong">追溯码：</label>
+        <text class="flex-item overflow">{{code}}{{offsetTop}}</text>
+      </view>
+      <block wx:if="{{result.length <= 4 && result.length > 1}}">
+        <view class="tab-goods">
+          <view wx:for="{{result}}" wx:key="{{index}}" class="item overflow {{curInfo == index?'on':''}}" data-cur="{{index}}" bindtap="chooseGoods">{{item.goods_name}}</view>
+        </view>
+      </block>
+      <block wx:if="{{result.length > 4}}">
+        <!-- transition:1s ease; -->
+        <scroll-view scroll-x="true" class="tab-goods" scroll-left="{{scrollLeft}}">
+          <view wx:for="{{result}}" wx:key="{{index}}" class="item overflow {{curInfo == index?'on':''}}" data-cur="{{index}}" bindtap="chooseGoods">{{!!item && !!item.goods_name? item.goods_name : '商品' + (index+1) }}</view>
+        </scroll-view>
+      </block>
+      <block wx:if="{{result.length == 1 && !!result[0]}}">
+        <label class="info-tip">追溯信息</label>
+        <view class="info flex">
+          <view class="info-icon-wapper">
+            <image wx:if="{{!!result[0].area_origin_name}}" class="info-icont" src="../../images/icon-supplier.png"></image>
+            <image wx:if="{{!!result[0].ws_supplier_type}}" class="info-icont" src="../../images/icon-address.png"></image>
+            <image wx:if="{{!!result[0].supplier_name}}" class="info-icont" src="../../images/icon-supplier-name.png"></image>
+            <image class="info-icont" src="../../images/icon-supermaker.png"></image>
+          </view>
+          <view class="flex-item">
+            <block wx:if="{{!!result[0].area_origin_name}}">
+              <label class="name">产地</label>
+              <view class="text">
+                <text class="tb-cell">{{result[0].area_origin_name}}</text>
+              </view>
+            </block>
+            <block wx:if="{{!!result[0].ws_supplier_type}}">
+              <label class="name">{{result[0].ws_supplier_type}}</label>
+              <view class="text">
+                <text class="tb-cell">{{result[0].ws_supplier_name}}</text>
+              </view>
+            </block>
+            <block wx:if="{{!!result[0].supplier_name}}">
+              <label class="name">供应商</label>
+              <view class="text">
+                <text class="tb-cell">{{result[0].supplier_name}}</text>
+              </view>
+            </block>
+            <label class="name">{{result[0].node_type}}</label>
+            <view class="text">
+              <text class="tb-cell">{{result[0].node_name}} <text wx:if="{{!!result[0].biz_name}}">({{result[0].biz_name}})</text></text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{result.length > 1}}">
+        <swiper current="{{curInfo}}" class="swiper-box" duration="300" bindchange="bindChange" style="height:{{swiperHeight}}">
+          <swiper-item wx:for="{{result}}" wx:key="{{index}}" scroll-left="{{scrollLeft}}">
+            <block wx:if="{{!!item}}">
+              <label class="info-tip">追溯信息</label>
+              <view class="info flex">
+                <view class="info-icon-wapper">
+                  <image wx:if="{{!!item.area_origin_name}}" class="info-icont" src="../../images/icon-supplier.png"></image>
+                  <image wx:if="{{!!item.ws_supplier_name}}" class="info-icont" src="../../images/icon-address.png"></image>
+                  <image wx:if="{{!!result[0].supplier_name}}" class="info-icont" src="../../images/icon-supplier-name.png"></image>
+                  <image class="info-icont" src="../../images/icon-supermaker.png"></image>
+                </view>
+                <view class="flex-item">
+                  <block wx:if="{{!!item.area_origin_name}}">
+                    <label class="name">产地</label>
+                    <view class="text">
+                      <text class="tb-cell">{{item.area_origin_name}}</text>
+                    </view>
+                  </block>
+                  <block wx:if="{{!!item.ws_supplier_name}}">
+                    <label class="name">{{item.ws_supplier_type}}</label>
+                    <view class="text">
+                      <text class="tb-cell">{{item.ws_supplier_name}}</text>
+                    </view>
+                  </block>
+                  <block wx:if="{{!!result[0].supplier_name}}">
+                    <label class="name">供应商</label>
+                    <view class="text">
+                      <text class="tb-cell">{{result[0].supplier_name}}</text>
+                    </view>
+                  </block>
+                  <label class="name">{{item.node_type}}</label>
+                  <view class="text">
+                    <text class="tb-cell">{{item.node_name}} <text wx:if="{{!!result[0].biz_name}}">({{result[0].biz_name}})</text></text>
+                  </view>
+                </view>
+              </view>
+            </block>
+            <block wx:if="{{!item}}">
+              <view class="info-unfind">
+                <image class="icont-unfind" src="../../images/unfind.png"></image>
+                <text class="text">其他追溯信息我们会尽快完善，\n期待您的下次查询！</text>
+              </view>
+            </block>
+          </swiper-item>
+        </swiper>
+      </block>
+      <block wx:if="{{result == null || result[0] == null}}">
+        <view class="info-unfind">
+          <image class="icont-unfind" src="../../images/unfind.png"></image>
+          <text class="text">其他追溯信息我们会尽快完善，\n期待您的下次查询！</text>
+        </view>
+      </block>
+    </view>
+    <block wx:if="{{code == '11010805700009999999'}}">
+      <view class="base">
+        <view class="title flex check">
+          <label class="strong flex-item">检测报告</label>
+          <text class="link">查看详情>></text>
+        </view>
+        <view class="tb check-infos">
+          <view class="tb-row">
+            <lable class="tba-cell w124">检测日期</lable>
+            <lable class="tba-cell pull-left">2017-03-16</lable>
+          </view>
+          <view class="tb-row">
+            <lable class="tba-cell w124">检测机构</lable>
+            <lable class="tba-cell pull-left">永顺华自检</lable>
+          </view>
+          <view class="tb-row">
+            <lable class="tba-cell w124">检测结果</lable>
+            <lable class="tba-cell pull-left">合格</lable>
+          </view>
+          <view class="tb-row">
+            <lable class="tba-cell w124">检测企业</lable>
+            <lable class="tba-cell pull-left">北京永顺华蔬菜种植有限公司</lable>
+          </view>
+        </view>
+      </view>
+      <view class="base">
+        <view class="title flex check">
+          <label class="strong flex-item">公司简介</label>
+        </view>
+        <view class="company-details">
+          <text>北京永顺华蔬菜种植有限公司成立于2001年，主要经营蔬菜种植、加工、配送、销售等业务。\n 公司现有员工300余人，基地总面积3100余亩：其中北京总部基地种植面积300余亩，聘请北京市农林科学院植物保护与环境保护研究所等多名专家、教授作为公司...</text>
+          <lable class="link">【详情】</lable>
+        </view>
+      </view>
+    </block>
+
+    <view class="footer-info">
+      <label class="inblock" bindtap="btnCode">
+        <text class="iconfont icon-scan"></text>
+        <text>扫一扫</text>
+      </label>
+    </view>
+  </view>
+</view>
+<loading hidden="{{hiddenLoading}}">正在加载</loading>

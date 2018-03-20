@@ -1,0 +1,102 @@
+.top-wapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 10;
+}
+
+.top-wapper .search-wapper {
+    height: 50rpx;
+    line-height: 50rpx;
+    padding: 15rpx 42rpx;
+}
+
+.search-wapper .flex {
+    background: #e5e5e5;
+    font-size: 26rpx;
+    color: #727272;
+    border-radius: 6rpx;
+}
+
+.search-wapper .iconfont {
+    display: inline-block;
+    width: 50rpx;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 26rpx;
+}
+
+.search-wapper input {
+    vertical-align: bottom;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+
+.tab-wapper {
+    line-height: 50rpx;
+    height: 50rpx;
+    padding: 20rpx 0;
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+    text-align: center;
+    color: #727272;
+    font-size: 28rpx;
+    table-layout: fixed;
+}
+
+.tab-wapper .flex-item {
+    position: relative;
+}
+
+.tab-wapper .flex-item.active {
+    color: #22a838;
+}
+
+.tab-wapper .flex-item:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0rpx;
+    width: 1px;
+    background: #ececec;
+    height: 50rpx;
+}
+
+.list-wapper {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.list-wapper .blank {
+    height: 170rpx;
+}
+
+.list-wapper .list-item {
+    padding: 20rpx 35rpx 20rpx 35rpx;
+    color: #727272;
+    border-bottom: 1px solid #ececec;
+}
+
+.list-wapper .supplier-name {
+    color: #232323;
+    font-size: 30rpx;
+}
+
+.list-wapper .distance {
+    font-family: Arial;
+    font-size: 26rpx;
+}
+
+.list-wapper .supplier-address {
+    display: block;
+    margin-top: 14rpx;
+    font-size: 26rpx;
+}
+
+
+

@@ -1,0 +1,228 @@
+.content {
+  background-color: #fff;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.input-map-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.input-map-wrapper .map-iocn {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: -5rpx;
+}
+.input-wrapper {
+  width: 610rpx;
+  margin: 18rpx 30rpx;
+  font-size: 30rpx;
+  color: #727272;
+  background-color: #e5e5e5;
+  border-radius: 8rpx;
+  padding-left: 20rpx;
+  z-index: 10;
+  position: relative;
+}
+
+.input-wrapper .input-box {
+  height: 70rpx;
+  line-height: 70rpx;
+  width: 550rpx;
+}
+
+.input-wrapper .search-icon {
+  width: 28rpx;
+  position: absolute;
+  right: 21rpx;
+  top: 21rpx; 
+  z-index: 999;
+}
+
+.limit-wrapper {
+  width: 100%;
+  border-top: 1px solid #e5e5e5;
+  z-index: 10;
+}
+
+.limit-wrapper .limit-wrapper-box {
+  display: flex;
+  justify-content: space-between;
+  color: #727272;
+  font-size: 32rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.limit-wrapper-box .flex-item .item-name .arrow-icon {
+  width: 28rpx;
+  position: absolute;
+  top: 18rpx;
+  right: -42rpx;
+  transition: all 0.3s linear;
+}
+
+.limit-wrapper-box .flex-item .item-name .arrow-icon.active {
+  transform: rotateZ(180deg);
+}
+
+.limit-wrapper-box .flex-item .item-name {
+  display: inline;
+  position: relative;
+}
+
+
+.limit-wrapper-box .flex-item {
+  flex: 0 0 50%;
+  text-align: center;
+  position: relative;
+}
+
+.company-area::after {
+  content: "";
+  height: 50rpx;
+  width: 1px;
+  background-color: #e5e5e5;
+  position: absolute;
+  right: 1rpx;
+  top: 23rpx;
+}
+
+.limit-content-wrapper {
+  font-size: 30rpx;
+  color: #727272;
+  padding-left: 40rpx;
+  position: relative;
+}
+
+.limit-content-wrapper .area-content, .limit-content-wrapper .type-content {
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.limit-content-wrapper .item {
+  padding-left: 40rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1px solid #e5e5e5;
+}
+.limit-content-wrapper .item:last-child {
+  border-bottom: none;
+}
+
+.modal-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 250rpx;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9;
+}
+
+.compaby-list-wrapper .company-item {
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid #e5e5e5;
+  color: #727272;
+  font-size: 28rpx;
+}
+
+.compaby-list-wrapper .company-item .top {
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.company-item .top .name {
+  color: #000;
+  font-size: 34rpx;
+}
+.company-item .top .name .keyword{
+  color: red;
+  display: inline;
+}
+
+.company-item .subtype-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  margin-bottom: 8rpx;
+}
+.company-item .subtype-content .left {
+  display: flex;
+  justify-content: flex-start;
+}
+.company-item .subtype-content .left .subtype {
+  color: #fff;
+  background-color: #22ac38;
+  padding: 6rpx 10rpx; 
+}
+.company-item .subtype-content .left .traceability-type {
+  background-color: transparent;
+  box-sizing: padding-box;
+  border:1px solid orange;
+  border-left: none;
+  color: orange;
+  padding: 6rpx 10rpx; 
+}
+.company-item .bottom {
+  display: flex;
+  align-items: flex-start;
+  
+}
+.company-item .bottom .location-icon{
+  width: 30rpx;
+  height: 30rpx;
+  position: relative;
+  top: 6rpx;
+}
+.company-item .bottom .address {
+  margin-left: 6rpx;
+}
+.loading, .finish {
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 2.6;
+  color: #727272;
+}
+
+.loading-wrapper {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #ffffff; 
+}
+
+.loading-wrapper .loading {
+    height: 60px;
+    width: 60px;
+    margin: 200px auto;
+    display: block;
+
+} 
+.fail-wrapper {
+  position: absolute;
+  left: 0; 
+  right: 0;
+  top: 400rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+.txmap {
+  position: fixed; 
+  height: 800px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 9999;
+}

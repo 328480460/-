@@ -1,0 +1,61 @@
+/* pages/leftSwiperDel/index.wxss */
+
+.logs-list {
+    width: 100%;
+    color: #727272;
+    font-size: 26rpx;
+    background: #fff;
+}
+
+.logs-list .content {
+    padding: 24rpx 0 28rpx 0;
+    border-bottom: 2rpx solid #ececec;
+}
+
+.logs-list .last.flex {
+    margin-top: 20rpx;
+}
+
+.logs-text.flex {
+    padding-right: 30rpx;
+}
+
+.item-icon {
+    margin: 0 20rpx 0 30rpx;
+    width: 80rpx;
+    height: 80rpx;
+    vertical-align: top;
+}
+
+.pull-right {
+    display: inline-block;
+}
+
+.flex.logs {
+    width: 100%;
+}
+
+.webkit-clamp1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.tb {
+    display: table;
+    width: 100%;
+}
+
+.tb-cell {
+    display: table-cell;
+}
+
+.logs.flex {
+    width: 100%;
+}
+
+.marg-left30 {
+    padding-left: 60rpx;
+}

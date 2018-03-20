@@ -1,0 +1,20 @@
+<view class="">
+    <view class="logs-list">
+        <navigator class="flex content" wx:for="{{list}}" wx:key="{{index}}" url="{{item.uri}}" redirect="true">
+            <image class="item-icon" mode="scaleToFill" src="../../images/icon-bg.png"></image>
+            <view class="flex-item overflow">
+                <view class="flex logs-text">
+                    <text class="flex-item overflow">{{item.code}}</text>
+                    <text class="marg-left30">{{!!item.goods_name ? item.goods_name : '商品' }}</text>
+                </view>
+                <view class="flex logs-text last">
+                    <text class="">{{item.timer}}</text>
+                    <text class="flex-item overflow pull-right">{{item.node_name}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <block wx:if="{{!list || !list.length>0}}">
+        <text class="no-data">/(ㄒoㄒ)/~~暂无查询记录</text>
+    </block>
+</view>

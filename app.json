@@ -1,0 +1,18 @@
+{
+    "pages": [
+        "pages/company/company",
+        "pages/index/index",
+        "pages/map/map",
+        "pages/chooseLocation/chooseLocation",
+        "pages/code/code",
+        "pages/about/about",
+        "pages/logs/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#22a438",
+        "navigationBarTitleText": "北京E追溯",
+        "backgroundColor": "#eeeeee",
+        "navigationBarTextStyle": "#ffffff"
+    }
+}

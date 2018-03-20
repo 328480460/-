@@ -1,0 +1,80 @@
+<view class="wapper" hidden="{{!hiddenLoading}}" >
+    <block wx:if="{{homeType == 0}}">
+        <view bindtap="judgeCity">
+            <block wx:if="{{chooseSuppliers.length > 0 && location.city == '北京市'}}">
+                <view class="supplier-select" bindtap="bindViewLink">
+                    {{node.name}}
+                    <text class="iconfont icon-arrows"></text>
+                </view>
+                <view class="logo-wapper">
+                    <image class="logo" src="../../images/logo.png"></image>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="supplier-select" bindtap="confirm">{{node.address}}
+                    <text class="iconfont icon-iconfontarrows"></text>
+                </view>
+                <view class="logo-wapper">
+                    <image class="logo" src="../../images/logo.png"></image>
+                </view>
+            </block>
+            <view class="handle-wapper">
+                <lable class="handle-tip">扫一扫商品条形码/二维码，查看商品追溯信息</lable>
+                <label class="txt">扫一扫</label>
+                <image class="scan" src="../../images/scan.png" bindtap="bindViewCode"></image>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{homeType == 1}}">
+        <view class="wapper">
+            <view class="flex-item userinfo-wapper">
+                <view class="jumbotron">
+                    <block wx:if="{{userInfo == null}}">
+                        <view class="user-info">
+                            <image class="user-image" src="../../images/my-user-default.jpg"></image>
+                            <text class="user-name"></text>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class="user-info">
+                            <image class="user-image" src="{{userInfo.avatarUrl}}"></image>
+                            <text class="user-name">{{userInfo.nickName}}</text>
+                        </view>
+                    </block>
+                    <image class="user-bg" src="../../images/my-bg.png"></image>
+                </view>
+                <view class="menu-list">
+                    <navigator class="item flex" url="../logs/index">
+                        <text class="iconfont icon-search-logs"></text>
+                        <text class="flex-item">查询记录</text>
+                        <text class="iconfont icon-caret"></text>
+                    </navigator>
+                    <navigator class="item flex" url="../about/about">
+                        <text class="iconfont icon-about"></text>
+                        <text class="flex-item">关于我们</text>
+                        <text class="iconfont icon-caret"></text>
+                    </navigator>
+                </view>
+            </view>
+            <view class="footer" bindtap="callPhone">
+                <text class="iconfont icon-phone"></text>
+                <label class="phone" bindtap="callPhone">联系客服</label>
+            </view>
+            <view class="index-blank"></view>
+        </view>
+    </block>
+    <view class="footer-tab">
+        <view class="tba">
+            <label class="tba-item {{homeType == 0 ? 'active':''}}" bindtap="swichHome" data-current="0">
+                <label class="icont iconfont icon-home"></label>
+                <text class="text">首页</text>
+            </label>
+            <label class="tba-item {{homeType == 1 ? 'active':''}}" bindtap="swichHome" data-current="1">
+                <label class="icont iconfont icon-my"></label>
+                <text class="text">我的</text>
+            </label>
+        </view>
+    </view>
+</view>
+<modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">{{dialog.content}}</modal>
+<loading hidden="{{hiddenLoading}}">正在加载</loading>

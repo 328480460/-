@@ -1,0 +1,18 @@
+<view class="container">
+    <view class="flex-item ">
+        <view class="logo-wapper">
+            <image class="logo" src="../../images/logo.png"></image>
+            <text class="tip">食品追溯服务商</text>
+        </view>
+    </view>
+    <view class="footer footer-about">
+        <view class="phone" bindtap="callPhone">
+            <text class="iconfont icon-phone"></text>
+            <label class="phone" bindtap="callPhone">联系客服</label>
+        </view>
+        <view class="copy">
+            <view>
+                <text class="iconfont icon-copy"></text>2017 北京志恒达科技有限公司 版本1.0.4</view>
+        </view>
+    </view>
+</view>
