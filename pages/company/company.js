@@ -1,9 +1,11 @@
 const areaList = require('../../utils/area.js');
+const typeList = require('../../utils/type.js');
 const basePath = 'https://www.bjfxr.com/analyse/';
 
 Page({
   data: {
     areaList: areaList,
+    typeList: typeList,
     dataList: [],
     latitude: '',
     longitude: '',
@@ -49,7 +51,7 @@ Page({
           // nodeName: res.latitude + '..' + res.longitude
         })
         // console.log(res.latitude, res.longitude)
-        _this.getCompanyList(res.longitude, res.latitude, '', 1, '', '');
+        _this.getCompanyList(res.longitude, res.latitude, '', 1, '', '', '');
       }
     })
   },
@@ -57,12 +59,14 @@ Page({
     let latitude = event.currentTarget.dataset.lat;
     let longitude = event.currentTarget.dataset.lon;
     let name = event.currentTarget.dataset.name;
+    let address = event.currentTarget.dataset.address;
     let coordinate = this.BdmapEncryptToMapabc(latitude, longitude)
     wx.openLocation({
       latitude: coordinate.lat, //parseFloat(latitude), 
       longitude: coordinate.lng, //parseFloat(longitude), 
-      scale: 28,
-      name: name
+      scale: 14,
+      name: name,
+      address: address
     })
   },
   turnMap() {
@@ -102,7 +106,7 @@ Page({
       page: 1,
       scrollTop: 0
     })
-    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, 1, this.data.companyTypeId, this.data.areaId)
+    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, 1, '', this.data.areaId, this.data.companyTypeId)
   },
   selectArea(event) {
     if (event.target.dataset.areaid) {
@@ -126,12 +130,12 @@ Page({
     this.setData({
       scrollTop: 0
     });
-    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, 1, this.data.companyTypeId, this.data.areaId)
+    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, 1, '', this.data.areaId, this.data.companyTypeId)
   },
   selectCompanyTypeId(event) {
     if (event.target.dataset.typeid) {
       this.setData({
-        companyTypeId: event.target.dataset.typeid,
+        companyTypeId: event.target.dataset.typename,
         companyTypeName: event.target.dataset.typename,
         isLoading: false,
         isFinish: false,
@@ -139,7 +143,7 @@ Page({
       })
     } else {
       this.setData({
-        companyTypeId: event.target.dataset.typeid,
+        companyTypeId: '',
         companyTypeName: "类型",
         isLoading: false,
         isFinish: false,
@@ -150,7 +154,7 @@ Page({
     this.setData({
       scrollTop: 0
     });
-    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, 1, this.data.companyTypeId, this.data.areaId)
+    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, 1, '', this.data.areaId, this.data.companyTypeId)
   },
   loadMore(event) {
     if (this.data.isFinish) {
@@ -163,7 +167,7 @@ Page({
       isLoading: true,
       page: ++this.data.page
     })
-    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, this.data.page, this.data.companyTypeId, this.data.areaId)
+    this.getCompanyList(this.data.longitude, this.data.latitude, this.data.nodeName, 1, '', this.data.areaId, this.data.companyTypeId)
   },
   notifyKeyword(data) {
     data.forEach((item, index) => {
@@ -177,7 +181,7 @@ Page({
       initeLoading: false
     })
   },
-  getCompanyList(lat, lon, node_name, page, companyType, area_id) {
+  getCompanyList(lat, lon, node_name, page, companyType, area_id,node_type) {
     var _this = this;
     wx.request({
       url: basePath + "tracingchain/nodeDistance",
@@ -188,7 +192,8 @@ Page({
         node_name: node_name,
         page: page,
         type: companyType,
-        area_id: area_id
+        area_id: area_id,
+        node_type: node_type
       },
       success(res) {
         // console.log(res)

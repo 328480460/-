@@ -136,11 +136,19 @@
 .compaby-list-wrapper .company-item .top {
   align-items: center;
   margin-bottom: 10rpx;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .company-item .top .name {
-  color: #000;
+  color: #232323;
   font-size: 34rpx;
+  font-weight: 700;
+}
+.company-item .top  .trace-code-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-left: 10rpx;
 }
 .company-item .top .name .keyword{
   color: red;
@@ -156,18 +164,17 @@
 .company-item .subtype-content .left {
   display: flex;
   justify-content: flex-start;
+  font-size: 24rpx;
 }
 .company-item .subtype-content .left .subtype {
-  color: #fff;
-  background-color: #22ac38;
+  background-color: #f2f2f2;
   padding: 6rpx 10rpx; 
+  border:1px solid #f2f2f2;
 }
 .company-item .subtype-content .left .traceability-type {
   background-color: transparent;
   box-sizing: padding-box;
-  border:1px solid orange;
-  border-left: none;
-  color: orange;
+  border:1px solid #f2f2f2;
   padding: 6rpx 10rpx; 
 }
 .company-item .bottom {

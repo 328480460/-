@@ -1,8 +1,8 @@
 {
     "pages": [
         "pages/company/company",
-        "pages/index/index",
         "pages/map/map",
+        "pages/index/index",
         "pages/chooseLocation/chooseLocation",
         "pages/code/code",
         "pages/about/about",
