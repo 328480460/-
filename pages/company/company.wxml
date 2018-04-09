@@ -28,7 +28,7 @@
           <view wx:for="{{areaList}}" wx:key="{{index}}" class='item' data-areaId="{{item.areaId}}" data-areaName="{{item.areaName}}" bindtap='selectArea'>{{item.areaName}}</view>
         </scroll-view>
         <scroll-view scroll-y style="height: 580rpx; display: {{companyTypeFlag? 'block' :'none'}}" class='type-content' id='company_wrapper'>
-          <view data-typeId="" class='item' bindtap='selectCompanyTypeId'>全部</view>
+           <view data-typeId="" class='item' data-typeName="" bindtap='selectCompanyTypeId'>全部</view> 
           <view wx:for="{{typeList}}" wx:key="{{index}}" class='item' data-typeId="{{item.typeId}}" data-typeName="{{item.typeName}}" bindtap='selectCompanyTypeId'>{{item.typeName}}</view>
         </scroll-view>
       </view>
