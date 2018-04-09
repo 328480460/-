@@ -6,6 +6,23 @@
     border-bottom: 2rpx solid #ececec;
 }
 
+.supplier-select {
+    height: 80rpx;
+    line-height: 80rpx;
+    border-bottom: 1rpx solid #ececec;
+    background: #fff;
+    text-align: center;
+    font-size: 30rpx;
+    color: #727272;
+}
+
+.supplier-select .iconfont {
+    font-size: 30rpx;
+    color: #b6b6b6;
+    margin-left: 12rpx;
+    vertical-align: bottom;
+    font-weight: bold;
+}
 .jumbotron-result .tip {
     display: block;
     font-size: 40rpx;

@@ -2,18 +2,18 @@
     <block wx:if="{{homeType == 0}}">
         <view bindtap="judgeCity">
             <block wx:if="{{chooseSuppliers.length > 0 && location.city == '北京市'}}">
-                <view class="supplier-select" bindtap="bindViewLink">
+                <!-- <view class="supplier-select" bindtap="bindViewLink">
                     {{node.name}}
                     <text class="iconfont icon-arrows"></text>
-                </view>
+                </view> -->
                 <view class="logo-wapper">
                     <image class="logo" src="../../images/logo.png"></image>
                 </view>
             </block>
             <block wx:else>
-                <view class="supplier-select" bindtap="confirm">{{node.address}}
+                <!-- <view class="supplier-select" bindtap="confirm">{{node.address}}
                     <text class="iconfont icon-iconfontarrows"></text>
-                </view>
+                </view> -->
                 <view class="logo-wapper">
                     <image class="logo" src="../../images/logo.png"></image>
                 </view>

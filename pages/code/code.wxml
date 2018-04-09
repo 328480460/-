@@ -1,4 +1,8 @@
 <view class="result-wapper" hidden="{{!hiddenLoading}}">
+  <view class="supplier-select" bindtap="bindViewLink" wx:if='{{nodeName}}'>
+    {{nodeName}}
+    <text class="iconfont icon-arrows"></text>
+  </view>
   <view class="jumbotron-result">
     <image class="logo" src="../../images/logo.png"></image>
     <text class="tip">可追溯，更放心</text>

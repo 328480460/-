@@ -1,1 +1,11 @@
- <map id="map" class='txmap' longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}"  markers="{{markers}}" bindmarkertap="markertap"  bindregionchange="regionchange" show-location style="width: 100%; height: {{screen}}px;"  controls="{{controls}}"></map> 
+<map id="map" class='txmap' longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: {{mapH}}px;" controls="{{controls}}" bindupdated="mapUpdated"></map>
+<view class='information-wrapper' style="width: 100%; height: {{infoH}}px;">
+  <view class='left'>
+    <view class='name'>{{currentMark.shopName}}</view>
+    <view class='address'><image src='../../images/location-icom.png'></image>{{currentMark.address}}</view>
+  </view>
+  <view class='right'>
+    <view class='go-wrapper' bindtap='openMap'><image src='../../images/arrow.png'></image></view> 
+    <view class='distance'>{{currentMark.distance}}km</view>
+  </view>
+</view>

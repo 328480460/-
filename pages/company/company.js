@@ -1,9 +1,11 @@
 const areaList = require('../../utils/area.js');
+const typeList = require('../../utils/type.js');
 const basePath = 'https://www.bjfxr.com/analyse/';
 
 Page({
   data: {
     areaList: areaList,
+    typeList: typeList,
     dataList: [],
     latitude: '',
     longitude: '',
@@ -40,9 +42,13 @@ Page({
       })
     }).exec();
 
+    this.getLocation();
+  },
+  getLocation() {
+    var _this = this;
     wx.getLocation({
+      type: 'gcj02',
       success(res) {
-        type: 'gcj02',
         _this.setData({
           latitude: res.latitude,
           longitude: res.longitude,
@@ -50,6 +56,17 @@ Page({
         })
         // console.log(res.latitude, res.longitude)
         _this.getCompanyList(res.longitude, res.latitude, '', 1, '', '');
+      },
+      fail: (res) => {
+        console.log(res)
+        wx.openSetting({
+          success: (res) => {
+            console.log(res);
+            if (res.authSetting['scope.userLocation']) {
+              _this.getLocation()
+            }
+          }
+        })
       }
     })
   },
@@ -57,12 +74,14 @@ Page({
     let latitude = event.currentTarget.dataset.lat;
     let longitude = event.currentTarget.dataset.lon;
     let name = event.currentTarget.dataset.name;
+    let address = event.currentTarget.dataset.address;
     let coordinate = this.BdmapEncryptToMapabc(latitude, longitude)
     wx.openLocation({
       latitude: coordinate.lat, //parseFloat(latitude), 
       longitude: coordinate.lng, //parseFloat(longitude), 
-      scale: 28,
-      name: name
+      scale: 14,
+      name: name,
+      address: address
     })
   },
   turnMap() {

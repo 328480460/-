@@ -1,12 +1,14 @@
 {
     "pages": [
-        "pages/company/company",
         "pages/index/index",
-        "pages/map/map",
+        "pages/company/company",
+        "pages/scanning/scanning",
         "pages/chooseLocation/chooseLocation",
         "pages/code/code",
+        "pages/map/map",
         "pages/about/about",
         "pages/logs/index"
+   
     ],
     "window": {
         "backgroundTextStyle": "light",

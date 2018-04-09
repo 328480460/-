@@ -6,7 +6,6 @@
         bindinput='changeKey' bindconfirm="selectKey" confirm-type='search' />
         <image bindtap='selectKey' src='../../images/search-icon_03.png' class='search-icon'  mode="widthFix" ></image> 
       </view>
-      <!-- <view class='map-iocn' bindtap='turnMap'>地图</view> -->
       <image src='../../images/map-icon.png' class='map-iocn' mode="widthFix" bindtap='turnMap'></image>
     </view>
     <view class='limit-wrapper' >
@@ -28,14 +27,10 @@
         <scroll-view scroll-y style="height: 580rpx; display: {{areaFlag? 'block' :'none'}}" class='area-content' id='area_wrapper'>
           <view wx:for="{{areaList}}" wx:key="{{index}}" class='item' data-areaId="{{item.areaId}}" data-areaName="{{item.areaName}}" bindtap='selectArea'>{{item.areaName}}</view>
         </scroll-view>
-        <view style="display: {{companyTypeFlag? 'block' :'none'}}" class='type-content' id='company_wrapper'>
+        <scroll-view scroll-y style="height: 580rpx; display: {{companyTypeFlag? 'block' :'none'}}" class='type-content' id='company_wrapper'>
           <view data-typeId="" class='item' bindtap='selectCompanyTypeId'>全部</view>
-          <view data-typeId="{{'0001'}}" class='item' data-typeName="{{'屠宰企业'}}" bindtap='selectCompanyTypeId'>屠宰企业</view>
-          <view data-typeId="{{'0002'}}" class='item' data-typeName="{{'批发市场'}}" bindtap='selectCompanyTypeId'>批发市场</view>
-          <view data-typeId="{{'0003'}}" class='item' data-typeName="{{'零售市场'}}" bindtap='selectCompanyTypeId'>零售市场</view>
-          <view data-typeId="{{'0004'}}" class='item' data-typeName="{{'连锁超市'}}" bindtap='selectCompanyTypeId'>连锁超市</view>
-          <view data-typeId="{{'0007'}}" class='item' data-typeName="{{'团体消费'}}" bindtap='selectCompanyTypeId'>团体消费</view>
-        </view>
+          <view wx:for="{{typeList}}" wx:key="{{index}}" class='item' data-typeId="{{item.typeId}}" data-typeName="{{item.typeName}}" bindtap='selectCompanyTypeId'>{{item.typeName}}</view>
+        </scroll-view>
       </view>
     </view>
   </view>
@@ -52,7 +47,7 @@
         </view>
         <view class='distance'>{{item.distance}} km</view>
       </view>
-      <view class='bottom' data-lat="{{item.Y_COORDINATE}}" data-lon="{{item.X_COORDINATE}}" data-name="{{item.addr}}" bindtap='openMap'>
+      <view class='bottom' data-lat="{{item.Y_COORDINATE}}" data-lon="{{item.X_COORDINATE}}" data-name="{{item.node_name}}" data-address="{{item.addr}}" bindtap='openMap'>
         <image class='location-icon' mode="widthFix" src='../../images/location-icom.png'></image>
         <view class='address'>{{item.addr}}</view>
       </view> 

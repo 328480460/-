@@ -1,51 +1,85 @@
 <view class="container" hidden="{{!hiddenLoading}}">
-    <view class="top-wapper">
-        <view class="search-wapper">
-            <view class="flex">
-                <text class="iconfont icon-search"></text>
-                <input type="text" class="flex-item" placeholder="输入商家名称" value="{{inputValue}}" bindconfirm="bindSearch" bindinput="bindKeyInput" />
-                <block wx:if="{{inputValue != ''}}">
-                    <text class="iconfont icon-clear" bindtap="clearInput"></text>
-                </block>
-            </view>
-        </view>
-        <view class="tab-wapper flex">
-            <label class="flex-item {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">附近商家</label>
-            <label class="flex-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">最近选择</label>
-        </view>
+  <view class="top-wapper">
+    <view class="search-wapper">
+      <view class="flex">
+        <text class="iconfont icon-search"></text>
+        <input confirm-type="search" type="text" class="flex-item" placeholder="输入商家名称" value="{{inputValue}}" bindconfirm="bindSearch" bindinput="bindKeyInput" />
+        <block wx:if="{{inputValue != ''}}">
+          <text class="iconfont icon-clear" bindtap="clearInput"></text>
+        </block>
+      </view>
     </view>
-    <view class="list-wapper" hidden="{{!searchLoading}}">
-        <view class="blank"></view>
-        <scroll-view scroll-y="true" style="height:{{winHeight - 85}}px" wx:if="{{currentTab == 0}}">
-            <view class="flex nearby list-item" wx:for="{{chooseSupplier}}" wx:key="{{index}}" bindtap="funChooseSupplier" data-nodeId="{{item.node_id}}" data-nodeName="{{item.node_name}}" data-addr="{{item.addr}}">
-                <view class="flex-item">
-                    <view class="flex">
-                        <label class="supplier-name flex-item overflow">{{item.node_name}}</label>
-                        <block wx:if="{{!!item.distance}}">
-                            <text class="distance">{{item.distance > 0.1 ? item.distance+'km': '>100m'}}</text>
-                        </block>
-                    </view>
-                    <label class="supplier-address overflow" data-addr="{{item.addr}}">地址：{{item.addr}} </label>
-                </view>
-            </view>
-            <block wx:if="{{chooseSupplier.length==0}}">
-                <text class="no-data">/(ㄒoㄒ)/~~抱歉没有找到您想要的商家</text>
-            </block>
-        </scroll-view>
-        <scroll-view scroll-y="true" style="height:{{winHeight - 85}}px" wx:if="{{currentTab == 1}}">
-            <view class="flex nearby list-item" wx:for="{{nearyChooses}}" wx:key="{{index}}" bindtap="funChooseSupplier" data-nodeId="{{item.node_id}}" data-nodeName="{{item.node_name}}" data-addr="{{item.addr}}">
-                <view class="flex-item">
-                    <view class="flex">
-                        <label class="supplier-name flex-item overflow">{{item.node_name}}</label>
-                    </view>
-                    <label class="supplier-address overflow">地址：{{item.addr}} </label>
-                </view>
-            </view>
-            <block wx:if="{{nearyChooses.length==0}}">
-                <text class="no-data">/(ㄒoㄒ)/~~暂无选择商户</text>
-            </block>
-        </scroll-view>
+    <view class="tab-wapper flex">
+      <label class="flex-item {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">附近商家</label>
+      <label class="flex-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">最近选择</label>
     </view>
+  </view>
+  <view class="list-wapper" hidden="{{!searchLoading}}">
+    <view class="blank"></view>
+    <scroll-view scroll-y="true" style="height:{{winHeight - 85}}px" wx:if="{{currentTab == 0}}">
+      <view class='current-title'>当前位置</view>
+      <view class='company-item current' bindtap="funChooseCurrent">
+        <view class='top'>
+          <view class='name'>{{currentShop.node_name}}</view>
+        </view>
+        <view class='subtype-content'>
+          <view class='left'>
+            <view class='subtype'>{{currentShop.node_type}}</view>
+            <view class='traceability-type'>可追溯品类：{{currentShop.traceability_type}}</view>
+          </view>
+          <view class='distance'>{{currentShop.distance}} km</view>
+        </view>
+        <view class='bottom'>
+          <image class='location-icon' mode="widthFix" src='../../images/location-icom.png'></image>
+          <view class='address'>{{currentShop.addr}}</view>
+        </view>
+      </view>
+      <view class='current-title'>附近商家</view>
+      <view wx:for="{{chooseSupplier}}" class='company-item' wx:key="{{index}}" bindtap="funChooseSupplier" data-nodeId="{{item.node_id}}" data-nodeName="{{item.node_name}}" data-addr="{{item.addr}}" data-subType='{{item.node_type}}' data-distance='{{item.distance}}'
+        data-goodsType='{{item.traceability_type}}'>
+        <view class='top'>
+          <view class='name' wx:if="{{!key}}">{{item.node_name}}</view>
+          <view class='name' wx:else>{{item.firstPart}}
+            <view class='keyword'>{{item.keyword}}</view>{{item.lastPart}}</view>
+        </view>
+        <view class='subtype-content'>
+          <view class='left'>
+            <view class='subtype'>{{item.node_type}}</view>
+            <view class='traceability-type'>可追溯品类：{{item.traceability_type}}</view>
+          </view>
+          <view class='distance'>{{item.distance}} km</view>
+        </view>
+        <view class='bottom'>
+          <image class='location-icon' mode="widthFix" src='../../images/location-icom.png'></image>
+          <view class='address'>{{item.addr}}</view>
+        </view>
+      </view>
+      <block wx:if="{{chooseSupplier.length==0}}">
+        <text class="no-data">/(ㄒoㄒ)/~~抱歉没有找到您想要的商家</text>
+      </block>
+    </scroll-view>
+    <scroll-view scroll-y="true" style="height:{{winHeight - 85}}px" wx:if="{{currentTab == 1}}">
+      <view wx:for="{{nearyChooses}}" class='company-item' wx:key="{{index}}" bindtap="funChooseSupplier" data-nodeId="{{item.node_id}}" data-nodeName="{{item.node_name}}" data-addr="{{item.addr}}">
+        <view class='top'>
+          <view class='name'>{{item.node_name}}</view>
+        </view>
+        <view class='subtype-content'>
+          <view class='left'>
+            <view class='subtype'>{{item.node_type}}</view>
+            <view class='traceability-type'>可追溯品类：{{item.traceability_type}}</view>
+          </view>
+          <view class='distance'>{{item.distance}} km</view>
+        </view>
+        <view class='bottom'>
+          <image class='location-icon' mode="widthFix" src='../../images/location-icom.png'></image>
+          <view class='address'>{{item.addr}}</view>
+        </view>
+      </view>
+      <block wx:if="{{nearyChooses.length==0}}">
+        <text class="no-data">/(ㄒoㄒ)/~~暂无选择商户</text>
+      </block>
+    </scroll-view>
+  </view>
 </view>
 <loading hidden="{{hiddenLoading}}">正在加载</loading>
 <loading hidden="{{searchLoading}}">正在加载</loading>
